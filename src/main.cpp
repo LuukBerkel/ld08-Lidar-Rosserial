@@ -1,18 +1,33 @@
 #include <Arduino.h>
-#include "ld08/ld08.hpp"
+#include <ld08.hpp>
+#include <ros.h>
+#include <std_msgs/String.h>
+#include <sensor_msgs/LaserScan.h>
 
 #define RXD2 16
-#define PWM  -1
+#define PWM  15
 
 ld08 lidar = ld08(RXD2, PWM);
 ld08_frame frame;
 
-void setup() {
-  Serial.begin(115200);
-  Serial.println("Starting demo of lidar ld08");
+ros::NodeHandle nh;
+sensor_msgs::LaserScan lidar_msg;
+ros::Publisher laser_pub("lidar", &lidar_msg);
 
+void messageCb(const std_msgs::String&) {
+}
+
+ros::Subscriber<std_msgs::String> sub("your_topic", &messageCb);
+
+
+    
+
+
+
+void setup() {
   lidar.begin();
-  Serial.println("Succesfully started lidar ld08");
+  nh.initNode();
+  nh.advertise(laser_pub);
 }
 
 void loop() { //Choose Serial1 or Serial2 as required
@@ -36,4 +51,6 @@ void loop() { //Choose Serial1 or Serial2 as required
     }
     Serial.println("]");
   }
+
+  nh.spinOnce();
 }
