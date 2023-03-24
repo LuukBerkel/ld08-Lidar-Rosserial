@@ -1,6 +1,16 @@
 {
     "files.associations": {
         "functional": "cpp",
-        "streambuf": "cpp"
+        "streambuf": "cpp",
+        "*.tcc": "cpp",
+        "algorithm": "cpp",
+        "memory": "cpp",
+        "random": "cpp",
+        "fstream": "cpp",
+        "iosfwd": "cpp",
+        "istream": "cpp",
+        "ostream": "cpp",
+        "sstream": "cpp",
+        "array": "cpp"
     }
 }
